@@ -1,1 +1,1 @@
-It is only signup page and if you have improvemnt on the design add to it, but basically i did not add sign with google and  security try to add those features and other features you think if you want.
+The current implementation includes only the signup page. While the basic functionality is in place, it can be enhanced by adding features like Google sign-in and improved security measures. If you have any additional suggestions to make the design even better, you can add them. For the Minimum Viable Product (MVP), I believe the existing features are sufficient.
