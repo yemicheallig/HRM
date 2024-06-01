@@ -1,0 +1,1 @@
+It is only signup page and if you have improvemnt on the design add to it, but basically i did not add sign with google and  security try to add those features and other features you think if you want.
