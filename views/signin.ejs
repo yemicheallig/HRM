@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HRM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+        a{
+            text-decoration: none;
+        }
+        .scrollable-div {
+            overflow-y: scroll;
+        }
+
+        /* Custom scrollbar for WebKit browsers */
+        .scrollable-div::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+        }
+
+        .scrollable-div::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Background of the scrollbar track */
+        }
+
+        .scrollable-div::-webkit-scrollbar-thumb {
+            background: #888; /* Color of the scrollbar thumb */
+            border-radius: 6px; /* Rounded corners for the thumb */
+        }
+
+        .scrollable-div::-webkit-scrollbar-thumb:hover {
+            background: #555; /* Color of the thumb on hover */
+        }
+
+        /* Custom scrollbar for Firefox */
+        .scrollable-div {
+            scrollbar-width: thin; /* "auto" or "thin" */
+            scrollbar-color: #888 #f1f1f1; /* thumb and track color */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-sm d-sm-block d-md-flex" style="">
+        <div class="col p-4 border scrollable-div" style="overflow-y: scroll;">
+            <h2 class="text-center fw-bold">Unlock your free access today</h2>
+            <p class="text-center">Sign in to your account or <a href="signup">Create Account</a></p>
+            <% if(messin){ %>
+            <p class="text-danger text-center"><%= messin %></p>
+            <% } %>
+            <form role="form" action="/signedin" method="post"  class="needs-validation mx-5"
+                novalidate>
+                <div class="mb-2">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" name="email" id="email" required>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="pwd" class="form-label">Password:</label>
+                    <input type="password" class="form-control" name="pwd" id="pwd"
+                        pattern="^(?=.*[a-zA-Z])(?=.*\d).{8,}$"
+                        title="Password must be at least 8 characters long and include letters and numbers." required>
+                    <div class="invalid-feedback">
+                        Password must be at least 8 characters long and include letters and numbers.
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-info text-white w-100" name="signup">Submit</button>
+                </div>
+                <p class="text-center mt-3">Or <a href="" class="text-primary">sign in</a> with
+            </form>
+        </div>
+
+        <div class="col-6 border d-sm-none d-md-block border">
+            <img src="./img/signbg.jpg" class="" alt="">
+        </div>
+
+    </div>
+
+    <script>
+        var forms = document.querySelectorAll('.needs-validation')
+        var passwordField = document.getElementById('pwd');
+
+        // Bootstrap form validation script
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+
+        // Function to validate password matching
+        
+    </script>
+</body>
+
+</html>
