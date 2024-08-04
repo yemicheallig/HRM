@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-accusoft"></span> <span class="sp">HRM</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li class="nav-item">
+                    <a class= "nav-link flex-a" aria-current="page" href="./">
+                        <i class="fa fa-home"></i> <p class="sp">Home</p> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class= "nav-link flex-a active" href="./dashboard">
+                        <i class="fa fa-tachometer-alt"></i> <p class="sp">Dashboard</p> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class= "nav-link flex-a" href="./Emteam">
+                        <i class="fa fa-users"></i> <p class="sp">Employee Management</p> 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class= "nav-link flex-a " href="./Tasktodo">
+                        <i class="fa fa-tasks"></i> <p class="sp"> Task List </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class= "nav-link flex-a" href="./RJobs">
+                        <i class="fa fa-briefcase"></i> <p class="sp">Recruitment</p> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+
+        <header id="head">
+            <h3>
+                <label for="nav-toggle" id="bars"><span class="las la-bars"></span> Dashboard</label>
+            </h3>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Search Here">
+            </div>
+
+            <div class="user-wrapper">
+                <img src="./assets/Image 130 (1).jpg" width="40px" height="40px" alt="">
+                <div>
+                    <h4>Jhon Doe</h4>
+                    <small>Super admin</small>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h1 id="welcome">Hello, Jhon Doe</h1>
+
+            <div class="cards">
+                <div class="card" id="chart">
+                    <h2 class="">Total Employee</h2>
+                    <div class="chart c2">
+                        <div class="cover"></div>
+                    </div>
+                    <div class="key">
+                        <div class="" >
+                            <span id="circle1" style="background-color: red;"></span> <span>67 Onboarding</span>
+                        </div>
+                        <div class="">
+                            <span id="circle2" style="background-color: blue;"></span> <span>23 Female</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="chart">
+                    <h2 class="">Total Applicant</h2>
+                    <div class="chart c3">
+                        <div class="cover"></div>
+                    </div>
+                    <div class="key">
+                        <div class="" >
+                            <span id="circle1" style="background-color: aqua;"></span> <span>67 Female</span>
+                        </div>
+                        <div class="">
+                            <span id="circle2" style="background-color: green;"></span> <span>23 Male</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="chart">
+                    <h2 class="">XYZ</h2>
+                    <div class="chart c4">
+                        <div class="cover"></div>
+                    </div>
+                    <div class="key">
+                        <div class="" >
+                            <span id="circle1" style="background-color: orangered;"></span> <span>KJLSDF</span>
+                        </div>
+                        <div class="">
+                            <span id="circle2" style="background-color: pink;"></span> <span>SDFS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="chart">
+                    <h2 class="">SDLKF</h2>
+                    <div class="chart c5">
+                        <div class="cover"></div>
+                    </div>
+                    <div class="key">
+                        <div class="" >
+                            <span id="circle1" style="background-color: rgb(62, 255, 104);"></span> <span>SDDAD</span>
+                        </div>
+                        <div class="">
+                            <span id="circle2" style="background-color: black;"></span> <span>SDASD</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <div class="recent-grid">
+                <div class="contain">
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Recent Projects</h2>
+                                <button>See all <span class="las la-arrow-right"></span></button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Job</td>
+                                                <td>Total Candidates</td>
+                                                <td>Vacanicies</td>
+                                                <td>Date Expired</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>UI/UX Design</td>
+                                                <td>10</td>
+                                                <td>2</td>
+                                                <td>09/12/2023</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Social Content Manager</td>
+                                                <td>5</td>
+                                                <td>1</td>
+                                                <td>15/12/2023</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Project Manager</td>
+                                                <td>12</td>
+                                                <td>3</td>
+                                                <td>19/12/2023</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Java Developer</td>
+                                                <td>5</td>
+                                                <td>3</td>
+                                                <td>22/01/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Customer Support</td>
+                                                <td>18</td>
+                                                <td>5</td>
+                                                <td>22/05/2024</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Feed Backs</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Job Title</td>
+                                                <td>Topic</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Jhon Doe</td>
+                                                <td>Developer</td>
+                                                <td>Cafe Services</td>
+                                                <td><a href="">Read More</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jane Doe</td>
+                                                <td>Designer</td>
+                                                <td>Workflow</td>
+                                                <td><a href="">Read More</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="projects">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Company News</h1>
+                            </div>
+                            <div class="card-body">
+                                <ul id="news">
+                                    <li><i class="fa-solid fa-notes-medical"></i>
+                                        <p>Introducing our Innovative Employee Wellness Program, prioritizing team
+                                            well-being</p>
+                                    </li>
+                                    <li><i class="fa-solid fa-heart"></i>
+                                        <p>Yoga Retreat Day: Nurturing Physical and Mental Resilience</p>
+                                    </li>
+                                    <li><i class="fa-solid fa-volume-high"></i>
+                                        <p>Tech Talks Series: Exploring Cutting-Edge Innovations in the Workplace</p>
+                                    </li>
+                                    <li><i class="fa-solid fa-user"></i>
+                                        <p>Client Success Stories: Showcasing the Impact of Our Products and Services
+                                        </p>
+                                    </li>
+                                    <li><i class="fa-solid fa-arrows-up-down-left-right"></i>
+                                        <p>Spotlight on Innovation: Showcasing Employee-Driven Creative Projects</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="customers">
+                    <div class="contain">
+
+                        <div class="card" id="chart">
+                            <h2 class="">Gender Ratio</h2>
+                            <div class="chart">
+                                <div class="cover"></div>
+                            </div>
+                            <div class="key">
+                                <div class="">
+                                    <span id="circle1"></span> <span>75 Male</span>
+                                </div>
+                                <div class="">
+                                    <span id="circle2"></span> <span>25 Female</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="">
+                                <h2>Interview</h2>
+
+                                <div class="box">
+                                    <div class="right">
+                                        <h2>09:00</h2>
+                                        <p>1st Inerview</p>
+                                    </div>
+                                    <div class="left">
+                                        <h2>Sales Executive</h2>
+                                        <p>John Davis</p>
+                                        <p>60 mins</p>
+                                        <p>Room 01</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="right">
+                                        <h2>09:00</h2>
+                                        <p>1st Inerview</p>
+                                    </div>
+                                    <div class="left">
+                                        <h2>Sales Executive</h2>
+                                        <p>John Davis</p>
+                                        <p>60 mins</p>
+                                        <p>Room 01</p>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="right">
+                                        <h2>09:00</h2>
+                                        <p>1st Inerview</p>
+                                    </div>
+                                    <div class="left">
+                                        <h2>Sales Executive</h2>
+                                        <p>John Davis</p>
+                                        <p>60 mins</p>
+                                        <p>Room 01</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+
+    </div>
+    </main>
+    </div>
+
+    <script>
+        let sidebar = document.querySelector('.sidebar')
+        let bars = document.querySelector('#bars')
+        let p = document.querySelectorAll('.sp')
+        let main = document.querySelector('.main-content')
+        let header = document.querySelector('#head')
+        console.log(sidebar, p)
+        bars.addEventListener('click', e => {
+            sidebar.classList.toggle('adjust')
+            header.classList.toggle('hdr')
+            p.forEach(elem => {
+                elem.classList.toggle('p')
+            })
+            main.classList.toggle('wdth')
+        })
+    </script>
+
+</body>
+
+</html>
