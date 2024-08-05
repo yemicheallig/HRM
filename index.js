@@ -3,7 +3,7 @@ const ejs = require("ejs");
 const session = require("express-session");
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MainRoutes = require("./src/routes/main");
+const pages = require("./src/routes/pages");
 const signup = require("./src/routes/signup");
 const signin = require("./src/routes/signin");
 
@@ -24,7 +24,7 @@ app.use(express.static("public"));
 
 app.use("/", signup);
 app.use("/", signin);
-app.use("/", MainRoutes);
+app.use("/", pages);
 
 // View Engine Setup
 app.set("views", "./src/views");
