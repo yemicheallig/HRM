@@ -15,7 +15,31 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const fileFilterConfig = function (req, file, cb) {
+  if (
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/gif" ||
+    file.mimetype === "image/webp" ||
+    file.mimetype === "image/bmp" ||
+    file.mimetype === "image/svg+xml" ||
+    file.mimetype === "image/tiff"
+  ) {
+    // calling callback with true as mimetype of file is an accepted image type
+    cb(null, true);
+  } else {
+    // false to indicate not to store the file
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10,
+  },
+  fileFilter: fileFilterConfig,
+});
 
 router.post("/RegisterApplicant", upload.single("resume"), (req, res) => {
   const {
@@ -62,7 +86,6 @@ router.post("/RegisterApplicant", upload.single("resume"), (req, res) => {
     leaving_reason,
     license,
   } = req.body;
-  console.log(email);
   const resumePath = req.file ? req.file.path : null;
 
   const query = `

@@ -77,17 +77,17 @@
         <div class="container-fluid container-md  ">
             <ul class="nav text-center d-flex justify-content-center p-2">
                 <li><a href="./RJobs" class="nav-link  text-secondary">Jobs</a></li>
-                <li><a href="./Rcandidates" class="nav-link active">Candidates</a></li>
+                <li><a href="./Rcandidates" class="nav-link active ">Candidates</a></li>
             </ul>
         </div>
     </header>
 
-    <div class="container mt-4">
+    <div class="container-fluid container-md mt-4">
         <button class="btn btn-danger ms-auto d-block mb-3">Delete</button>
     </div>
 
     <main class="container-fluid container-md bg-white">
-        <div class="">
+        <!-- <div class="">
             <header class="p-4 bg-white">
                 <form class="d-flex ">
 
@@ -95,56 +95,52 @@
                         aria-label="Search">
                 </form>
             </header>
-        </div>
+        </div> -->
         <hr>
         <div class="">
             <table class="table table-hover">
                 <tr>
                     <thead>
                         <th scope="col"><input type="checkbox" name="" id=""></th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">CV</th>
-                        <th scope="col">APPLIED DATE</th>
-                        <th scope="col">DEPARTMENT</th>
-                        <th scope="col">ACTION</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Position Title</th>
+                        <th scope="col">Area of Expertise</th>
+                        <th scope="col">View More</th>
+                        <th scope="col">Edit</th>
                     </thead>
                 </tr>
-                <tr>
-                    <tbody>
-                        <td scope="row"><input type="checkbox" name="" id=""></td>
-                        <td><span class="">JHON DOE</span></td>
-
-                        <td><i class="fa-solid fa-file"></i></td>
-                        <td>09/12/12</td>
-                        <td>Designer</td>
-                        <td> <button class="btn btn-danger">Remove</button>
-                        </td>
-                    </tbody>
-                </tr>
-                <tr>
-                    <tbody>
-                        <td scope="row"><input type="checkbox" name="" id=""></td>
-                        <td><span class="">JANE DOE </span></td>
-
-                        <td><i class="fa-solid fa-file"></i></td>
-                        <td>09/12/12</td>
-                        <td>Designer</td>
-                        <td> <button class="btn btn-danger">Remove</button>
-                        </td>
-                    </tbody>
-                </tr>
-                <tr>
-                    <tbody>
-                        <td scope="row"><input type="checkbox" name="" id=""></td>
-                        <td><span class="">EMILY DACKSON</span></td>
-
-                        <td><i class="fa-solid fa-file"></i></td>
-                        <td>09/12/12</td>
-                        <td>Designer</td>
-                        <td> <button class="btn btn-danger">Remove</button>
-                        </td>
-                    </tbody>
-                </tr>
+                <% if(data){ %>
+                    <% data.forEach(element=> { %>
+                        <tr>
+                            <tbody>
+                                <td scope="row"><input type="checkbox" name="" id=""></td>
+                                <td>
+                                    <%= element.full_name %>
+                                </td>
+                                <td>
+                                    <%= element.email %>
+                                </td>
+                                <td>
+                                    <%= element.position_title %>
+                                </td>
+                                <td>
+                                    <%= element.area_of_expertise %>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        View More
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tbody>
+                        </tr>
+                        <% }); %>
+                            <% } %>
             </table>
         </div>
     </main>

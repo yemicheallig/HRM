@@ -6,6 +6,10 @@ const PORT = process.env.PORT || 5000;
 const pages = require("./src/routes/pages");
 const signup = require("./src/routes/signup");
 const signin = require("./src/routes/signin");
+const addTask = require("./src/routes/addTask");
+const addJob = require("./src/routes/addJobs");
+const editTask = require("./src/routes/editTask");
+const editJob = require("./src/routes/editJob");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -25,6 +29,10 @@ app.use(express.static("public"));
 app.use("/", signup);
 app.use("/", signin);
 app.use("/", pages);
+app.use("/", addTask);
+app.use("/", addJob);
+app.use("/", editTask);
+app.use("/", editJob);
 
 // View Engine Setup
 app.set("views", "./src/views");
