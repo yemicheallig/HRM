@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    * {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .active {
+        font-weight: bold;
+        color: orangered !important;
+    }
+
+    .btn-orange {
+        color: white;
+        background: orangered !important;
+    }
+
+    .text-orange {
+        color: orangered;
+    }
+</style>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid container-md">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/logo.jpg" class="ms-3" width="50px" height="50px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="./Emteam">Employee Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./Tasktodo">Task List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="./RJobs">Recruitement</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-center">
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid container-md shadow mt-5 mx-auto p-2">
+        <a href="/Tasktodo">Back</a>
+        <% if(data){ %>
+            <% data.forEach(element=> { %>
+                <div class="row">
+                    <h1>Task</h1>
+                    <p> <b>Title: </b>
+                        <%= element.task_title %>
+                    </p>
+                    <p> <b>Description: </b>
+                        <%= element.task_description %>
+                    </p>
+                    <p> <b>Priority: </b>
+                        <%= element.priority %>
+                    </p>
+                    <p> <b>Status:</b>
+                        <%= element.status%>
+                    </p>
+                    <p> <b>Start Date:</b>
+                        <%= element.start_date%>
+                    </p>
+                    <p> <b>Due Date:</b>
+                        <%= element.due_date%>
+                    </p>
+                    <p> <b>Category:</b>
+                        <%= element.category %>
+                    </p>
+                    <p> <b>Progress:</b>
+                        <%= element.progress %>%
+                    </p>
+                    <% if(element.attachments){ %>
+                        <p> <b>Attachement File: </b><br>
+                        <div class="card ms-4" style="width:fit-content;">
+                            <a href="/taskFile/<%= element.attachments %>" download>
+                                <div class="card-body">
+                                    <center><i class="fas fa-file fs-1"></i></center>
+                                    <p class="mb-1">Download</p>
+                                </div>
+                            </a>
+                        </div>
+                        </p>
+                        <% } %>
+                </div>
+    </div>
+    <% }); %>
+        <% } %>
+
+            <div class="container-fluid bg-dark">
+                <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">
+                    <div class="col text-white">
+                        <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none"><img
+                                src="/assets/logo.jpg" width="60px" height="60px" alt="">
+                        </a>
+                        <p class="text-white">&copy; 2021</p>
+                    </div>
+
+                    <div class="col">
+                    </div>
+
+                    <div class="col ">
+                        <h5>Product</h5>
+                        <ul class="nav flex-column ">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <h5>Resources </h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">User
+                                    grades</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Webinars</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <h5>Platform</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Parterners
+                                    &
+                                    Integration</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Become a
+                                    partner</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Developer
+                                    Api</a></li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+</body>
+
+<html>

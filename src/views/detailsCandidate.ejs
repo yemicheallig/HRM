@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+    * {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .active {
+        font-weight: bold;
+        color: orangered !important;
+    }
+
+    .btn-orange {
+        color: white;
+        background: orangered !important;
+    }
+
+    .text-orange {
+        color: orangered;
+    }
+</style>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid container-md">
+            <a class="navbar-brand" href="#">
+                <img src="/assets/logo.jpg" class="ms-3" width="50px" height="50px" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li>
+                        <a class="nav-link" aria-current="page" href="./">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="./Emteam">Employee Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Tasktodo">Task List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./RJobs">Recruitement</a>
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-center">
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid container-md shadow mt-5 mx-auto p-2">
+        <a href="/Rcandidates">Back</a>
+        <% if(data){ %>
+            <% data.forEach(element=> { %>
+                <div class="row">
+                    <h1>Personal Information</h1>
+                    <p> <b>Full Name: </b>
+                        <%= element.full_name %>
+                    </p>
+                    <p> <b>Phone: </b>
+                        <%= element.phone_no %>
+                    </p>
+                    <p> <b>Email: </b>
+                        <%= element.email %>
+                    </p>
+                    <p> <b>Age: </b>
+                        <%= element.age %>
+                    </p>
+                    <p> <b>Primary Language:</b>
+                        <%= element.primary_language%>
+                    </p>
+                    <% if(element.language1){ %>
+                        <p> <b>Language1:<%= element.language1 %></b> <br> <b>Competency Level: </b>
+                            <%= element.competency_level1%>
+                        </p>
+                        <% } %>
+                            <% if(element.language2){ %>
+                                <p> <b>Language2:<%= element.language2 %></b> <br> <b>Competency Level: </b>
+                                    <%= element.competency_level2 %>
+                                </p>
+                                <% } %>
+                                    <% if(element.language3){ %>
+                                        <p> <b>Language3:<%= element.language3 %></b> <br> <b>Competency Level: </b>
+                                            <%= element.competency_level3 %>
+                                        </p>
+                                        <% } %>
+                </div>
+                <div class="row">
+                    <h1>Education</h1>
+                    <p> <b>High School Name:</b>
+                        <%= element.high_school_name %> <br> <b>From </b>
+                            <%= element.high_school_from %> <b>To </b>
+                                <%= element.high_school_to %>
+                    </p>
+                    <p> <b>UnderGrad School Name:<%= element.undergrad_school_name %></b> <br> <b>From </b>
+                        <%= element.undergrad_school_from %> <b> To</b>
+                            <%= element.undergrad_school_to %> <br> <b>Major
+                                    Subject: </b>
+                                <%= element.highSchoolMajorSubject %>
+                    </p>
+                    <% if(element.tech_school_name){ %>
+                        <p> <b>Technical/Vocational School Name:<%= element.tech_school_name %></b> <br> <b>From</b>
+                            <% element.tech_school_from %> <b>To:</b>
+                                <%= element.tech_school_to %> <br> <b>Major
+                                        Subject:</b>
+                                    <%= element.tech_school_major_subject %>
+                        </p>
+                        <% } %>
+                            <p><b>Educational Level:</b>
+                                <%= element.education_level %>
+                            </p>
+                            <p><b>GPA:</b>
+                                <%= element.cgpa %>
+                            </p>
+                </div>
+                <div class="row">
+                    <h1>Work</h1>
+                    <div class="col">
+                        <p> <b>Position Applying For: </b>
+                            <%= element.position_title %>
+                        </p>
+                        <p> <b>Area Of Expertise: </b>
+                            <%= element.area_of_expertise %>
+                        </p>
+                        <p> <b>Total Years of Working: </b>
+                            <%= element.total_year_of_experience %>
+                        </p>
+                        <p> <b>Work Duties: </b>
+                            <%= element.work_duties %>
+                        </p>
+                        <p> <b>Other Skills: </b>
+                            <%= element.other_skills %>
+                        </p>
+                        <p> <b>Leaving Reason For Previous Job: </b>
+                            <%= element.leaving_reason %>
+                        </p>
+                        <% if(element.cv_path){ %>
+                            <p> <b>CV: </b><br>
+                            <div class="card ms-4" style="width:fit-content;">
+                                <a href="/uploads/<%= element.cv_path %>" download>
+                                    <div class="card-body">
+                                        <center><i class="fas fa-file fs-1"></i></center>
+                                        <p class="mb-1">Download</p>
+                                    </div>
+                                </a>
+                            </div>
+                            </p>
+                            <% } %>
+                    </div>
+                </div>
+    </div>
+    <% }); %>
+        <% } %>
+            <div class="container-fluid bg-dark">
+                <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">
+                    <div class="col text-white">
+                        <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none"><img
+                                src="/assets/logo.jpg" width="60px" height="60px" alt="">
+                        </a>
+                        <p class="text-white">&copy; 2021</p>
+                    </div>
+
+                    <div class="col">
+                    </div>
+
+                    <div class="col ">
+                        <h5>Product</h5>
+                        <ul class="nav flex-column ">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <h5>Resources</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">User
+                                    grades</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Webinars</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col">
+                        <h5>Platform</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Parterners
+                                    &
+                                    Integration</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Become a
+                                    partner</a></li>
+                            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Developer
+                                    Api</a></li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+</body>
+
+<html>
