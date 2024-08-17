@@ -1,9 +1,9 @@
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    task_title VARCHAR(255) NOT NULL,
+    task_title VARCHAR(255),
     task_description TEXT,
-    priority ENUM('Low', 'Medium', 'High', 'Urgent') NOT NULL,
-    status ENUM('NotStarted', 'InProgress', 'Completed', 'OnHold') NOT NULL,
+    priority VARCHAR(255),
+    status VARCHAR(255),
     start_date DATE,
     due_date DATE,
     attachments VARCHAR(255),

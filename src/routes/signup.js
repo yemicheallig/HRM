@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     unique = uuidv4();
-    cb(null, unique + file.originalname);
+    const sanitizedFilename = path.basename(file.originalname);
+    cb(null, `${unique}${sanitizedFilename}`);
   },
 });
 
@@ -50,7 +51,7 @@ router.post(
     // Add more validation rules as needed
   ],
   async (req, res) => {
-    const errors = validationResult(req);
+    /* const errors = validationResult(req);
     if (!errors.isEmpty()) {
       // Format error messages into a string
       const errorMessages = errors
@@ -61,7 +62,7 @@ router.post(
       // Render signup page with error messages
       return res.render("signup", { message: errorMessages });
     }
-
+ */
     const {
       full_name,
       email,
@@ -99,7 +100,7 @@ router.post(
     try {
       // Hash password before storing it
       const hashedPassword = await bcrypt.hash(password, 10);
-      const fileName = req.file && unique + req.file.originalname;
+      const fileName = req.file && `${unique}${req.file.originalname}`;
       const resumePath = req.file ? fileName : null;
 
       const query = `

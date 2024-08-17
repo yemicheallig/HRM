@@ -75,7 +75,7 @@
             <% if(data){ %>
                 <% data.forEach(element=> { %>
                     <form class="mt-5" action="/editTask/" method="post" enctype="multipart/form-data">
-                        <input type="text" style="display: none;" name="id" value="<%= element.id %>">
+                        <input type="text" style="display: none;" name="taskid" value="<%= element.id %>">
                         <div class="row mb-4">
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
@@ -159,9 +159,9 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="category">9. Category:</label>
-                                    <input type="text" id="category" name="category" value="<%= element.category  %>"
-                                        class="form-control" />
+                                    <label class="form-label" for="department">9. Department:</label>
+                                    <input type="text" id="department" name="department"
+                                        value="<%= element.department  %>" class="form-control" />
                                 </div>
                             </div>
                         </div>
