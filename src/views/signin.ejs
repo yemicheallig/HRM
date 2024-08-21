@@ -51,9 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link " href="./Emteam">Employee Management</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="./Tasktodo">Task List</a>
                     </li>
@@ -72,28 +72,34 @@
         <h1 class="text-center">Signin Form</h1>
 
         <!-- Display error message if present -->
-        <% if (message) { %>
+        <% if (message !==null && message !==true) { %>
             <div class="alert alert-danger" role="alert">
                 <%= message %>
             </div>
             <% } %>
 
-                <form class="container mt-5" action="/LoginApplicant" method="post"
-                    enctype="application/x-www-form-urlencoded">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="row">
-                        <button data-mdb-ripple-init type="submit" class="w-100 btn btn-primary">Signin</button>
-                    </div>
-                    <p class="text-center mt-3">Don't Have An <a href="./up">account?</a></p>
-                </form>
+                <% if(message===true){ %>
+                    <script>
+                        alert('Account Created Sucessfully')
+                    </script>
+                    <% } %>
+
+                        <form class="container mt-5" action="/LoginApplicant" method="post"
+                            enctype="application/x-www-form-urlencoded">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                            <div class="row">
+                                <button data-mdb-ripple-init type="submit" class="w-100 btn btn-primary">Signin</button>
+                            </div>
+                            <p class="text-center mt-3">Don't Have An <a href="./up">account?</a></p>
+                        </form>
     </div>
     <div class="container-fluid bg-dark">
         <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">

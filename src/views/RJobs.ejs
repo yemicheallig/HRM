@@ -56,9 +56,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link " href="./Emteam">Employee Management</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="./Tasktodo">Task List</a>
                     </li>
@@ -128,16 +128,22 @@
                                     <%= element.department %>
                                 </td>
                                 <td>
-                                    <a href="editJob/<%= element.id %>">Edit</a>
+                                    <a href="/editJob?id=<%= element.id %>">Edit</a>
                                 </td>
                                 <td>
-                                    <a href="deleteJob/<%= element.id %>" class="text-danger">Delete</a>
+                                    <a href="/deleteJob/<%= element.id %>" class="text-danger">Delete</a>
                                 </td>
                             </tbody>
 
                         </tr>
                         <% }); %>
-                            <% } %>
+                            <% }else{ %>
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <h1>No Jobs</h1>
+                                    </td>
+                                </tr>
+                                <% } %>
             </table>
         </div>
     </main>

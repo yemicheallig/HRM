@@ -71,286 +71,320 @@
         <h1 class="text-center">My Profile</h1>
         <a href="/changePwd">Change Password</a>
         <div class="container mt-5">
-            <% if(data){ %>
-                <% data.forEach(element=> { %>
-                    <form class="mt-5" action="/myaccount" method="post" enctype="multipart/form-data">
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="fullName">1. Full Name: </label>
-                                    <input type="text" id="fullName" name="full_name" class="form-control"
-                                        value="<%= element.full_name %>" />
+            <% if (message) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= message %>
+                </div>
+                <% } %>
+                    <% if(data){ %>
+                        <% data.forEach(element=> { %>
+                            <form class="mt-5" action="/myaccount" method="post" enctype="multipart/form-data">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="fullName">1. Full Name: </label>
+                                            <input type="text" id="fullName" name="full_name" class="form-control"
+                                                value="<%= element.full_name %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4" style="display: none;">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="">id: </label>
-                                    <input type="text" id="" name="id" class="form-control" value="<%= element.id %>" />
+                                <div class="row mb-4" style="display: none;">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="">id: </label>
+                                            <input type="text" id="" name="id" class="form-control"
+                                                value="<%= element.id %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="email">2. Email: </label>
-                                    <input type="email" id="email" name="email" class="form-control"
-                                        value="<%= element.email %>" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="email">2. Email: </label>
+                                            <input type="email" id="email" name="email" class="form-control"
+                                                value="<%= element.email %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="age">3. Age: </label>
-                                    <input type="number" name="age" id="age" class="form-control"
-                                        value="<%= element.age %>">
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="age">3. Age: </label>
+                                            <input type="number" name="age" id="age" class="form-control"
+                                                value="<%= element.age %>">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="positionTitle">4. Position title: (Position You Are
-                                        Applying For) </label>
-                                    <input type="text" id="positionTitle" name="position_title" class="form-control"
-                                        value="<%= element.position_title %>" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="positionTitle">4. Position title: (Position
+                                                You Are
+                                                Good At) </label>
+                                            <input type="text" id="positionTitle" name="position_title"
+                                                class="form-control" value="<%= element.position_title %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="areaOfExpertise">5. The area of expertise you
-                                        studied:</label>
-                                    <input type="text" id="areaOfExpertise" name="area_of_expertise"
-                                        class="form-control" value="<%= element.area_of_expertise %>" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="areaOfExpertise">5. The area of expertise you
+                                                studied:</label>
+                                            <input type="text" id="areaOfExpertise" name="area_of_expertise"
+                                                class="form-control" value="<%= element.area_of_expertise %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="educationLevel">6. Education Level: </label>
-                                    <select name="education_level" class="form-control mb-2" id="">
-                                        <option value="Diploma">Diploma</option>
-                                        <option value="Degree">Degree</option>
-                                        <option value="Masters">Masters</option>
-                                        <option value="PHD">PHD</option>
-                                        <option value="other">other</option>
-                                    </select>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="educationLevel">6. Education Level: </label>
+                                            <select name="education_level" class="form-control mb-2" id="">
+                                                <option value="Diploma">Diploma</option>
+                                                <option value="Degree">Degree</option>
+                                                <option value="Masters">Masters</option>
+                                                <option value="PHD">PHD</option>
+                                                <option value="other">other</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="cgpa">7. CGPA: </label>
-                                    <input type="text" id="cgpa" name="cgpa" class="form-control"
-                                        value="<%= element.cgpa %>" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="cgpa">7. CGPA: </label>
+                                            <input type="text" id="cgpa" name="cgpa" class="form-control"
+                                                value="<%= element.cgpa %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="phoneNo">8. Phone No: </label>
-                                    <input type="text" id="phoneNo" name="phone_no" class="form-control"
-                                        value="<%= element.phone_no %>" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="phoneNo">8. Phone No: </label>
+                                            <input type="text" id="phoneNo" name="phone_no" class="form-control"
+                                                value="<%= element.phone_no %>" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="otherSkills">9. Other Skills: </label>
-                                    <textarea class="form-control mb-2" id="otherSkills" name="other_skills" rows="3"
-                                        placeholder="Major Subject"><%= element.other_skills %></textarea>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="otherSkills">9. Other Skills: </label>
+                                            <textarea class="form-control mb-2" id="otherSkills" name="other_skills"
+                                                rows="3"
+                                                placeholder="Major Subject"><%= element.other_skills %></textarea>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="education">10. EDUCATION</label>
-                            <ul class="container">
-                                <li>
-                                    <label class="form-label" for="undergradSchoolName">Undergraduate College/University
-                                        Name of School, City, State or Country</label>
-                                    <input type="text" id="undergradSchoolName" name="undergrad_school_name"
-                                        class="form-control mb-2" placeholder="Name Of College"
-                                        value="<%= element.undergrad_school_name %>" />
-                                    From: <input type="date" id="undergradSchoolFrom" name="undergrad_school_from"
-                                        class="form-control mb-2" placeholder="From"
-                                        value="<%= element.undergrad_school_from %>" />
-                                    To: <input type="date" id="undergradSchoolTo" name="undergrad_school_to"
-                                        class="form-control mb-2" placeholder="To"
-                                        value="<%= element.undergrad_school_to %>" />
-                                    <textarea class="form-control mb-2" id="undergradMajorSubject"
-                                        name="undergrad_major_subject" rows="3"
-                                        placeholder="Major Subject"><%= element.undergrad_major_subject %></textarea>
-                                </li>
-                                <li>
-                                    <label class="form-label" for="highSchoolName">High School/GED or Country Equivalent
-                                        Name of School, City, State or Country</label>
-                                    <input type="text" id="highSchoolName" name="high_school_name"
-                                        class="form-control mb-2" placeholder="Name Of School"
-                                        value="<%= element.high_school_name %>" />
-                                    From: <input type="date" id="highSchoolFrom" name="high_school_from"
-                                        class="form-control mb-2" placeholder="From"
-                                        value="<%= element.high_school_from %>" />
-                                    To: <input type="date" id="highSchoolTo" name="high_school_to"
-                                        class="form-control mb-2" placeholder="To"
-                                        value="<%= element.high_school_to %>" />
-                                    <textarea class="form-control mb-2" id="highSchoolMajorSubject"
-                                        name="high_school_major_subject" rows="3"
-                                        placeholder="Major Subject"><%= element.high_school_major_subject %></textarea>
-                                </li>
-                                <li>
-                                    <label class="form-label" for="techSchoolName">Technical/Vocational School Name of
-                                        School, City, State or Country</label>
-                                    <input type="text" id="techSchoolName" name="tech_school_name"
-                                        class="form-control mb-2" placeholder="Name Of School"
-                                        value="<%= element.tech_school_name %>" />
-                                    From: <input type="date" id="techSchoolFrom" name="tech_school_from"
-                                        class="form-control mb-2" placeholder="From"
-                                        value="<%= element.tech_school_from %>" />
-                                    To: <input type="date" id="techSchoolTo" name="tech_school_to"
-                                        class="form-control mb-2" placeholder="To"
-                                        value="<%= element.tech_school_to %>" />
-                                    <textarea class="form-control mb-2" id="techSchoolMajorSubject"
-                                        name="tech_school_major_subject" rows="3"
-                                        placeholder="Major Subject"><%= element.tech_school_major_subject %></textarea>
-                                </li>
-                            </ul>
-                        </div>
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="languages">11. LANGUAGES</label>
-                            <ul class="container">
-                                <li>
-                                    <label class="form-label" for="primaryLanguage">Primary/First Spoken/Native
-                                        Language</label>
-                                    <input type="text" id="primaryLanguage" name="primary_language"
-                                        class="form-control mb-2" placeholder="Enter your primary language"
-                                        value="<%= element.primary_language %>" />
-                                </li>
-                                <li>
-                                    <label class="form-label" for="language1">Language 1</label>
-                                    <input type="text" id="language1" name="language1" class="form-control mb-2"
-                                        placeholder="Enter language" value="<%= element.language1 %>" />
-                                    <label class="form-label" for="competencyLevel1">Competency Level:</label>
-                                    <select class="form-control mb-2" id="competencyLevel1" name="competency_level1">
-                                        <option value="I" <%=element.competency_level1==='I' ? 'selected' : '' %>>Level
-                                            I: Basic Knowledge</option>
-                                        <option value="II" <%=element.competency_level1==='II' ? 'selected' : '' %>
-                                            >Level II: Limited Knowledge</option>
-                                        <option value="III" <%=element.competency_level1==='III' ? 'selected' : '' %>
-                                            >Level III: Good Working Knowledge</option>
-                                        <option value="IV" <%=element.competency_level1==='IV' ? 'selected' : '' %>
-                                            >Level IV: Fluent</option>
-                                        <option value="V" <%=element.competency_level1==='V' ? 'selected' : '' %>>Level
-                                            V: Professional Translator/Interpreter</option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label class="form-label" for="language2">Language 2</label>
-                                    <input type="text" id="language2" name="language2" class="form-control mb-2"
-                                        placeholder="Enter language" value="<%= element.language2 %>" />
-                                    <label class="form-label" for="competencyLevel2">Competency Level:</label>
-                                    <select class="form-control mb-2" id="competencyLevel2" name="competency_level2">
-                                        <option value="I" <%=element.competency_level2==='I' ? 'selected' : '' %>>Level
-                                            I: Basic Knowledge</option>
-                                        <option value="II" <%=element.competency_level2==='II' ? 'selected' : '' %>
-                                            >Level II: Limited Knowledge</option>
-                                        <option value="III" <%=element.competency_level2==='III' ? 'selected' : '' %>
-                                            >Level III: Good Working Knowledge</option>
-                                        <option value="IV" <%=element.competency_level2==='IV' ? 'selected' : '' %>
-                                            >Level IV: Fluent</option>
-                                        <option value="V" <%=element.competency_level2==='V' ? 'selected' : '' %>>Level
-                                            V: Professional Translator/Interpreter</option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <label class="form-label" for="language3">Language 3</label>
-                                    <input type="text" id="language3" name="language3" class="form-control mb-2"
-                                        placeholder="Enter language" value="<%= element.language3 %>" />
-                                    <label class="form-label" for="competencyLevel3">Competency Level:</label>
-                                    <select class="form-control mb-2" id="competencyLevel3" name="competency_level3">
-                                        <option value="I" <%=element.competency_level3==='I' ? 'selected' : '' %>>Level
-                                            I: Basic Knowledge</option>
-                                        <option value="II" <%=element.competency_level3==='II' ? 'selected' : '' %>
-                                            >Level II: Limited Knowledge</option>
-                                        <option value="III" <%=element.competency_level3==='III' ? 'selected' : '' %>
-                                            >Level III: Good Working Knowledge</option>
-                                        <option value="IV" <%=element.competency_level3==='IV' ? 'selected' : '' %>
-                                            >Level IV: Fluent</option>
-                                        <option value="V" <%=element.competency_level3==='V' ? 'selected' : '' %>>Level
-                                            V: Professional Translator/Interpreter</option>
-                                    </select>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="coverLetter">12. Work Experience:</label>
-                                    <br>
-                                    <ul>
+                                    <label class="form-label" for="education">10. EDUCATION</label>
+                                    <ul class="container">
                                         <li>
-                                            <label class="form-label" for="jobFrom">Total years of experience</label>
-                                            <input type="number" id="total_year_of_experience"
-                                                name="total_year_of_experience" class="form-control mb-2"
-                                                placeholder="total year of experience" />
+                                            <label class="form-label" for="undergradSchoolName">Undergraduate
+                                                College/University
+                                                Name of School, City, State or Country</label>
+                                            <input type="text" id="undergradSchoolName" name="undergrad_school_name"
+                                                class="form-control mb-2" placeholder="Name Of College"
+                                                value="<%= element.undergrad_school_name %>" />
+                                            From: <input type="date" id="undergradSchoolFrom"
+                                                name="undergrad_school_from" class="form-control mb-2"
+                                                placeholder="From" value="<%= element.undergrad_school_from %>" />
+                                            To: <input type="date" id="undergradSchoolTo" name="undergrad_school_to"
+                                                class="form-control mb-2" placeholder="To"
+                                                value="<%= element.undergrad_school_to %>" />
+                                            <textarea class="form-control mb-2" id="undergradMajorSubject"
+                                                name="undergrad_major_subject" rows="3"
+                                                placeholder="Major Subject"><%= element.undergrad_major_subject %></textarea>
                                         </li>
                                         <li>
-                                            <label class="form-label" for="jobDuties">Describe your major
-                                                duties/responsibilities and accomplishments.(If You're 0 years type
-                                                Junior)</label>
-                                            <textarea class="form-control mb-2" id="jobDuties" name="work_duties"
-                                                rows="3" placeholder=""></textarea>
+                                            <label class="form-label" for="highSchoolName">High School/GED or Country
+                                                Equivalent
+                                                Name of School, City, State or Country</label>
+                                            <input type="text" id="highSchoolName" name="high_school_name"
+                                                class="form-control mb-2" placeholder="Name Of School"
+                                                value="<%= element.high_school_name %>" />
+                                            From: <input type="date" id="highSchoolFrom" name="high_school_from"
+                                                class="form-control mb-2" placeholder="From"
+                                                value="<%= element.high_school_from %>" />
+                                            To: <input type="date" id="highSchoolTo" name="high_school_to"
+                                                class="form-control mb-2" placeholder="To"
+                                                value="<%= element.high_school_to %>" />
+                                            <textarea class="form-control mb-2" id="highSchoolMajorSubject"
+                                                name="high_school_major_subject" rows="3"
+                                                placeholder="Major Subject"><%= element.high_school_major_subject %></textarea>
                                         </li>
                                         <li>
-                                            <label class="form-label" for="reasonForLeaving">Reason(s) for Leaving (Do
-                                                not write
-                                                "N/A" or "not applicable".)</label>
-                                            <textarea class="form-control mb-2" id="reasonForLeaving"
-                                                name="leaving_reason" rows="3" placeholder=""></textarea>
+                                            <label class="form-label" for="techSchoolName">Technical/Vocational School
+                                                Name of
+                                                School, City, State or Country</label>
+                                            <input type="text" id="techSchoolName" name="tech_school_name"
+                                                class="form-control mb-2" placeholder="Name Of School"
+                                                value="<%= element.tech_school_name %>" />
+                                            From: <input type="date" id="techSchoolFrom" name="tech_school_from"
+                                                class="form-control mb-2" placeholder="From"
+                                                value="<%= element.tech_school_from %>" />
+                                            To: <input type="date" id="techSchoolTo" name="tech_school_to"
+                                                class="form-control mb-2" placeholder="To"
+                                                value="<%= element.tech_school_to %>" />
+                                            <textarea class="form-control mb-2" id="techSchoolMajorSubject"
+                                                name="tech_school_major_subject" rows="3"
+                                                placeholder="Major Subject"><%= element.tech_school_major_subject %></textarea>
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4 d-none">
-                            <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="path">file path</label>
-                                    <textarea class="form-control mb-2" id="path" name="filepath" rows="3"
-                                        placeholder="List professional licenses, certifications"><%= element.cv_path %></textarea>
+                                    <label class="form-label" for="languages">11. LANGUAGES</label>
+                                    <ul class="container">
+                                        <li>
+                                            <label class="form-label" for="primaryLanguage">Primary/First Spoken/Native
+                                                Language</label>
+                                            <input type="text" id="primaryLanguage" name="primary_language"
+                                                class="form-control mb-2" placeholder="Enter your primary language"
+                                                value="<%= element.primary_language %>" />
+                                        </li>
+                                        <li>
+                                            <label class="form-label" for="language1">Language 1</label>
+                                            <input type="text" id="language1" name="language1" class="form-control mb-2"
+                                                placeholder="Enter language" value="<%= element.language1 %>" />
+                                            <label class="form-label" for="competencyLevel1">Competency Level:</label>
+                                            <select class="form-control mb-2" id="competencyLevel1"
+                                                name="competency_level1">
+                                                <option value="I" <%=element.competency_level1==='I' ? 'selected' : ''
+                                                    %>>Level
+                                                    I: Basic Knowledge</option>
+                                                <option value="II" <%=element.competency_level1==='II' ? 'selected' : ''
+                                                    %>
+                                                    >Level II: Limited Knowledge</option>
+                                                <option value="III" <%=element.competency_level1==='III' ? 'selected'
+                                                    : '' %>
+                                                    >Level III: Good Working Knowledge</option>
+                                                <option value="IV" <%=element.competency_level1==='IV' ? 'selected' : ''
+                                                    %>
+                                                    >Level IV: Fluent</option>
+                                                <option value="V" <%=element.competency_level1==='V' ? 'selected' : ''
+                                                    %>>Level
+                                                    V: Professional Translator/Interpreter</option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            <label class="form-label" for="language2">Language 2</label>
+                                            <input type="text" id="language2" name="language2" class="form-control mb-2"
+                                                placeholder="Enter language" value="<%= element.language2 %>" />
+                                            <label class="form-label" for="competencyLevel2">Competency Level:</label>
+                                            <select class="form-control mb-2" id="competencyLevel2"
+                                                name="competency_level2">
+                                                <option value="I" <%=element.competency_level2==='I' ? 'selected' : ''
+                                                    %>>Level
+                                                    I: Basic Knowledge</option>
+                                                <option value="II" <%=element.competency_level2==='II' ? 'selected' : ''
+                                                    %>
+                                                    >Level II: Limited Knowledge</option>
+                                                <option value="III" <%=element.competency_level2==='III' ? 'selected'
+                                                    : '' %>
+                                                    >Level III: Good Working Knowledge</option>
+                                                <option value="IV" <%=element.competency_level2==='IV' ? 'selected' : ''
+                                                    %>
+                                                    >Level IV: Fluent</option>
+                                                <option value="V" <%=element.competency_level2==='V' ? 'selected' : ''
+                                                    %>>Level
+                                                    V: Professional Translator/Interpreter</option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            <label class="form-label" for="language3">Language 3</label>
+                                            <input type="text" id="language3" name="language3" class="form-control mb-2"
+                                                placeholder="Enter language" value="<%= element.language3 %>" />
+                                            <label class="form-label" for="competencyLevel3">Competency Level:</label>
+                                            <select class="form-control mb-2" id="competencyLevel3"
+                                                name="competency_level3">
+                                                <option value="I" <%=element.competency_level3==='I' ? 'selected' : ''
+                                                    %>>Level
+                                                    I: Basic Knowledge</option>
+                                                <option value="II" <%=element.competency_level3==='II' ? 'selected' : ''
+                                                    %>
+                                                    >Level II: Limited Knowledge</option>
+                                                <option value="III" <%=element.competency_level3==='III' ? 'selected'
+                                                    : '' %>
+                                                    >Level III: Good Working Knowledge</option>
+                                                <option value="IV" <%=element.competency_level3==='IV' ? 'selected' : ''
+                                                    %>
+                                                    >Level IV: Fluent</option>
+                                                <option value="V" <%=element.competency_level3==='V' ? 'selected' : ''
+                                                    %>>Level
+                                                    V: Professional Translator/Interpreter</option>
+                                            </select>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col">
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="resume">13. CV:</label>
-                                    <input type="file" id="resume" name="resume" class="form-control" />
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="coverLetter">12. Work Experience:</label>
+                                            <br>
+                                            <ul>
+                                                <li>
+                                                    <label class="form-label" for="jobFrom">Total years of
+                                                        experience</label>
+                                                    <input type="number" id="total_year_of_experience"
+                                                        name="total_year_of_experience" class="form-control mb-2"
+                                                        placeholder="total year of experience" />
+                                                </li>
+                                                <li>
+                                                    <label class="form-label" for="jobDuties">Describe your major
+                                                        duties/responsibilities and accomplishments.(If You're 0 years
+                                                        type
+                                                        Junior)</label>
+                                                    <textarea class="form-control mb-2" id="jobDuties"
+                                                        name="work_duties" rows="3" placeholder=""></textarea>
+                                                </li>
+                                                <li>
+                                                    <label class="form-label" for="reasonForLeaving">Reason(s) for
+                                                        Leaving Your
+                                                        Previous Job(If you are a starter, write 'i am a
+                                                        starter')</label>
+                                                    <textarea class="form-control mb-2" id="reasonForLeaving"
+                                                        name="leaving_reason" rows="3" placeholder=""></textarea>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                    <% }) }; %>
+                                <div class="row mb-4 d-none">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="path">file path</label>
+                                            <textarea class="form-control mb-2" id="path" name="filepath" rows="3"
+                                                placeholder="List professional licenses, certifications"><%= element.cv_path %></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline mb-4">
+                                            <label class="form-label" for="resume">13. CV: pdf, doc, jpg, png, jpeg,
+                                                docx only
+                                                allowed</label>
+                                            <input type="file" id="resume" name="resume" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                            <% }) }; %>
 
-                        <% if(success){ %>
-                            <script>
-                                alert('Account Updated Successsfully')
-                            </script>
-                            <%} %>
+                                <% if(success){ %>
+                                    <script>
+                                        alert('Account Updated Successsfully')
+                                        window.location.href = '/myaccount'
+                                    </script>
+                                    <%} %>
         </div>
-
 </body>
 
 </html>

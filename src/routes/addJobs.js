@@ -5,7 +5,7 @@ const router = express.Router();
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, check } = require("express-validator");
 
 const uploadsPath = path.join(__dirname, "../../public/jobPic");
 var unique;
@@ -39,7 +39,7 @@ const fileFilterConfig = (req, file, cb) => {
   if (allowedMimeTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error("Unsupported file type"), false);
+    cb(null, false);
   }
 };
 
@@ -49,27 +49,21 @@ const upload = multer({
   fileFilter: fileFilterConfig,
 });
 
+const filetypes = ["jpg", "jpeg", "png", "gif", "webp", "svg+xml", "tiff"];
+
 const validateJobData = [
-  body("job_title").trim().isLength({ min: 1 }).escape(),
-  body("total_candidates").isInt({ min: 0 }),
-  body("vacancies").isInt({ min: 1 }),
-  body("department").trim().escape(),
-  body("job_description").trim().escape(),
-  body("job_requirements").trim().escape(),
-  body("employment_type").trim().escape(),
-  body("location").trim().escape(),
-  body("salary_range").trim().escape(),
-  body("application_deadline").isISO8601().toDate(),
-  body("experience_level").trim().escape(),
-  body("education_requirements").trim().escape(),
-  body("skills_required").trim().escape(),
-  body("job_benefits").trim().escape(),
-  body("contact_information").trim().escape(),
-  body("posting_date").isISO8601().toDate(),
-  body("job_category").trim().escape(),
-  body("responsibilities").trim().escape(),
-  body("application_method").trim().escape(),
-  body("additional_notes").trim().optional().escape(),
+  check("relatedImage")
+    .custom((value, { req }) => {
+      const fileExtension = path
+        .extname(req.file.originalname)
+        .toLowerCase()
+        .slice(1);
+      if (!filetypes.includes(fileExtension)) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage("jpg, jpeg, png, gif, webp, svg+xml, tiff only allowed"),
 ];
 
 router.post(
@@ -80,7 +74,11 @@ router.post(
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(" and ");
+      return res.status(400).render("addJOb", { message: errorMessages });
     }
 
     const {
@@ -100,8 +98,7 @@ router.post(
       job_benefits,
       contact_information,
       posting_date,
-      /*       job_category,
-       */ responsibilities,
+      responsibilities,
       application_method,
       additional_notes,
     } = req.body;
@@ -119,6 +116,37 @@ router.post(
         relatedImage
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
+    const required = [
+      job_title,
+      total_candidates,
+      vacancies,
+      department,
+      job_description,
+      job_requirements,
+      employment_type,
+      location,
+      salary_range,
+      application_deadline,
+      experience_level,
+      education_requirements,
+      skills_required,
+      job_benefits,
+      contact_information,
+      posting_date,
+      responsibilities,
+      application_method,
+      additional_notes,
+      relatedImage,
+    ];
+
+    required.every((field) => {
+      if (field == "" || field === null) {
+        res
+          .status(400)
+          .render("addJOb", { message: "Please Fill In All of the field" });
+        return false;
+      }
+    });
 
     const values = [
       job_title,
@@ -147,9 +175,9 @@ router.post(
     db.query(sql, values, (err, results) => {
       if (err) {
         console.error("Database error:", err);
-        res.status(500).send("Error saving job posting.");
+        return res.status(500).send("Error saving job posting.");
       } else {
-        res.redirect("/addJob");
+        return res.render("addJob", { message: "success" });
       }
     });
   }

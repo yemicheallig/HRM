@@ -13,7 +13,12 @@ router.post(
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(" and ");
+
+      res.render("signin", { message: errorMessages });
     }
 
     const email = req.body.email;
@@ -21,7 +26,6 @@ router.post(
 
     const sql =
       "SELECT id,email, password FROM applicant_information WHERE email = ?";
-
     db.query(sql, [email], async function (err, data) {
       if (err) {
         console.error(err);

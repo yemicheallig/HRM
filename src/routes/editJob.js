@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require("path");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
-const { param, body, validationResult } = require("express-validator");
+const { param, body, validationResult, check } = require("express-validator");
 
 // Configure multer for file upload
 var unique;
@@ -48,43 +48,64 @@ const upload = multer({
 });
 
 // Route to get job details for editing
-router.get(
-  "/editJob/:id",
-  [param("id").isInt().withMessage("Invalid job ID")],
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).send("Invalid request");
+router.get("/editJob/", (req, res) => {
+  const jobId = req.query.id;
+  const message = req.query.message;
+
+  const sql = `SELECT * FROM job_postings WHERE id = ?`;
+
+  db.query(sql, [jobId], (err, rows) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res
+        .status(500)
+        .send("An error occurred while fetching job details.");
     }
-
-    const jobId = req.params.id;
-    const sql = `SELECT * FROM job_postings WHERE id = ?`;
-
-    db.query(sql, [jobId], (err, rows) => {
-      if (err) {
-        console.error("Database error:", err);
-        return res
-          .status(500)
-          .send("An error occurred while fetching job details.");
-      }
-      res.render("editJob", { data: rows });
-    });
-  }
-);
+    if (message) {
+      res.render("editJob", { data: rows, message: message });
+    } else {
+      res.render("editJob", { data: rows, message: null });
+    }
+  });
+});
 
 // Route to update job details
+const filetypes = ["jpg", "jpeg", "png", "gif", "webp", "svg+xml", "tiff"];
+
 router.post(
   "/editJob",
   upload.single("relatedImage"),
   [
     body("id").isInt().withMessage("Invalid job ID"),
     body("job_title").notEmpty().withMessage("Job title is required"),
-    // Add additional validations as needed for other fields
+    check("relatedImage")
+      .custom((value, { req }) => {
+        if (!req.file) {
+          return true;
+        }
+
+        const fileExtension = path
+          .extname(req.file.originalname)
+          .toLowerCase()
+          .slice(1);
+        if (!filetypes.includes(fileExtension)) {
+          return false;
+        }
+        return true;
+      })
+      .withMessage("jpg, jpeg, png, gif, webp, svg+xml, tiff only allowed"),
   ],
   (req, res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      return res.status(400).send("Invalid request");
+      const errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(" \n ");
+      return res
+        .status(400)
+        .redirect(`/editJob?id=${req.body.id}&&message=${errorMessages}`);
     }
 
     const {
@@ -174,7 +195,7 @@ router.post(
         return res.status(500).send("Error updating job posting");
       } else {
         console.log("Job edited successfully");
-        res.redirect(`/editJob/${id}`);
+        res.redirect(`/editJob?id=${id}&&message=success`);
       }
     });
   }

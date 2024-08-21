@@ -39,6 +39,11 @@ app.use("/", editJob);
 app.use("/", myaccount);
 app.use("/", changepwd);
 app.use("/", deleteFunction);
+app.get("*", (req, res) => {
+  res.send(
+    `<div style='height:100vh;width:100%;display:flex;flex-direction:column;justify-content:center'><h1 style='text-align:center;margin-bottom:30px'>404 Page Not Found</h1><a href='/' style='text-align:center'>Home</a></div>`
+  );
+});
 
 // View Engine
 app.set("views", "./src/views");

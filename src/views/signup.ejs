@@ -51,9 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link " href="./Emteam">Employee Management</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="./Tasktodo">Task List</a>
                     </li>
@@ -81,7 +81,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="fullName">1. Full Name: </label>
-                                    <input type="text" id="fullName" name="full_name" class="form-control" />
+                                    <input type="text" id="fullName" name="full_name" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="email">2. Email: </label>
-                                    <input type="email" id="email" name="email" class="form-control" />
+                                    <input type="email" id="email" name="email" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,8 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="password">3. Password: </label>
-                                    <input type="password" id="password" name="password" class="form-control" />
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        required />
                                 </div>
                             </div>
                         </div>
@@ -105,7 +106,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="age">4, Age </label>
-                                    <input type="age" id="age" name="age" min="0" class="form-control" />
+                                    <input type="age" id="age" name="age" min="0" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -113,12 +114,12 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="positionTitle">5. Position title: (Position You Are
-                                        Applying For) </label>
-                                    <input type="text" id="positionTitle" name="position_title" class="form-control" />
+                                        Good At)</label>
+                                    <input type="text" id="positionTitle" name="position_title" class="form-control"
+                                        required />
                                 </div>
                             </div>
                         </div>
-
                         <div class="row mb-4">
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
@@ -126,7 +127,7 @@
                                         studied:
                                     </label>
                                     <input type="text" id="areaOfExpertise" name="area_of_expertise"
-                                        class="form-control" />
+                                        class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -148,7 +149,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="cgpa">8. CGPA: </label>
-                                    <input type="text" id="cgpa" name="cgpa" class="form-control" />
+                                    <input type="text" id="cgpa" name="cgpa" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -156,7 +157,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="phoneNo">9. Phone No: </label>
-                                    <input type="text" id="phoneNo" name="phone_no" class="form-control" />
+                                    <input type="text" id="phoneNo" name="phone_no" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -165,7 +166,7 @@
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="otherSkills">10. Other Skills: </label>
                                     <textarea class="form-control mb-2" id="otherSkills" name="other_skills" rows="3"
-                                        placeholder="Major Subject"></textarea>
+                                        placeholder="Major Subject" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -176,34 +177,35 @@
                                     <label class="form-label" for="undergradSchoolName">
                                         College/University</label>
                                     <input type="text" id="undergradSchoolName" name="undergrad_school_name"
-                                        class="form-control mb-2" placeholder="Name Of College" />
+                                        class="form-control mb-2" placeholder="Name Of College" required />
                                     From: <input type="date" id="undergradSchoolFrom" name="undergrad_school_from"
-                                        class="form-control mb-2" placeholder="From" />
+                                        class="form-control mb-2" placeholder="From" required />
                                     To: <input type="date" id="undergradSchoolTo" name="undergrad_school_to"
-                                        class="form-control mb-2" placeholder="To" />
+                                        class="form-control mb-2" placeholder="To" required />
                                     <textarea class="form-control mb-2" id="undergradMajorSubject"
-                                        name="undergrad_major_subject" rows="3" placeholder="Major Subject"></textarea>
+                                        name="undergrad_major_subject" rows="3" placeholder="Major Subject"
+                                        required></textarea>
                                 </li>
                                 <li>
                                     <label class="form-label" for="highSchoolName">High School</label>
                                     <input type="text" id="highSchoolName" name="high_school_name"
-                                        class="form-control mb-2" placeholder="Name Of School" />
+                                        class="form-control mb-2" placeholder="Name Of School" required />
                                     From: <input type="date" id="highSchoolFrom" name="high_school_from"
-                                        class="form-control mb-2" placeholder="From" />
+                                        class="form-control mb-2" placeholder="From" required />
                                     To: <input type="date" id="highSchoolTo" name="high_school_to"
-                                        class="form-control mb-2" placeholder="To" />
+                                        class="form-control mb-2" placeholder="To" required />
                                 </li>
                                 <li>
                                     <label class="form-label" for="techSchoolName">Technical/Vocational School</label>
                                     <input type="text" id="techSchoolName" name="tech_school_name"
-                                        class="form-control mb-2" placeholder="Name Of School" />
+                                        class="form-control mb-2" placeholder="Name Of School" required />
                                     From: <input type="date" id="techSchoolFrom" name="tech_school_from"
-                                        class="form-control mb-2" placeholder="From" />
+                                        class="form-control mb-2" placeholder="From" required />
                                     To: <input type="date" id="techSchoolTo" name="tech_school_to"
-                                        class="form-control mb-2" placeholder="To" />
+                                        class="form-control mb-2" placeholder="To" required />
                                     <textarea class="form-control mb-2" id="techSchoolMajorSubject"
-                                        name="tech_school_major_subject" rows="3"
-                                        placeholder="Major Subject"></textarea>
+                                        name="tech_school_major_subject" rows="3" placeholder="Major Subject"
+                                        required></textarea>
                                 </li>
                             </ul>
                         </div>
@@ -214,7 +216,7 @@
                                     <label class="form-label" for="primaryLanguage">Primary/First Spoken/Native
                                         Language</label>
                                     <input type="text" id="primaryLanguage" name="primary_language"
-                                        class="form-control mb-2" placeholder="Enter your primary language" />
+                                        class="form-control mb-2" placeholder="Enter your primary language" required />
                                 </li>
                                 <li>
                                     <label class="form-label" for="language1">Language 1</label>
@@ -268,35 +270,25 @@
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="coverLetter">13. Work Experiance:</label>
                                     <br>
-                                    <span class="text-warning">Start with your present or most recent work experience.
-                                        When
-                                        describing work, list specific duties/responsibilities and accomplishments.
-                                        Include
-                                        supervisory responsibilities and the number of employees supervised. Go into as
-                                        much
-                                        detail as possible for work experience that directly relates to the advertised
-                                        position.
-                                        Include all periods of unemployment and the reason</span>
                                     <ul>
                                         <li>
                                             <label class="form-label" for="jobFrom">Total years of experience</label>
                                             <input type="number" id="total_year_of_experience"
                                                 name="total_year_of_experience" class="form-control mb-2"
-                                                placeholder="total year of experience" />
+                                                placeholder="total year of experience" required />
                                         </li>
                                         <li>
                                             <label class="form-label" for="jobDuties">Describe your major
                                                 duties/responsibilities and accomplishments.(If You're 0 years type
                                                 Junior)</label>
                                             <textarea class="form-control mb-2" id="jobDuties" name="job_duties"
-                                                rows="3" placeholder=""></textarea>
+                                                rows="3" placeholder="" required></textarea>
                                         </li>
                                         <li>
-                                            <label class="form-label" for="reasonForLeaving">Reason(s) for Leaving (Do
-                                                not write
-                                                "N/A" or "not applicable".)</label>
+                                            <label class="form-label" for="reasonForLeaving">Reason(s) for Leaving Your
+                                                Previous Job(If you are a starter, write 'I am a starter')</label>
                                             <textarea class="form-control mb-2" id="reasonForLeaving"
-                                                name="leaving_reason" rows="3" placeholder=""></textarea>
+                                                name="leaving_reason" rows="3" placeholder="" required></textarea>
                                         </li>
                                     </ul>
                                 </div>
@@ -306,7 +298,7 @@
                             <div class="col">
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="resume">14. CV:</label>
-                                    <input type="file" id="resume" name="resume" class="form-control" />
+                                    <input type="file" id="resume" name="resume" class="form-control" required />
                                 </div>
                             </div>
                         </div>
@@ -315,50 +307,54 @@
                         </div>
                     </form>
                 </div>
+    </div>
+
+    <div class="container-fluid bg-dark" style="margin-top: 100vh;">
+        <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">
+            <div class="col text-white">
+                <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none"><img
+                        src="/assets/logo.jpg" width="60px" height="60px" alt="">
+                </a>
+                <p class="text-white">&copy; 2021</p>
+            </div>
+
+            <div class="col">
+            </div>
+
+            <div class="col ">
+                <h5>Product</h5>
+                <ul class="nav flex-column ">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a>
+                    </li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Resources</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Blog</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">User
+                            grades</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Webinars</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h5>Platform</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Parterners &
+                            Integration</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Become a
+                            partner</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Developer
+                            Api</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
 </body>
-
-</html>
-<div class="container-fluid bg-dark">
-    <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">
-        <div class="col text-white">
-            <a href="/" class="d-flex align-items-center mb-3 text-white text-decoration-none"><img
-                    src="./assets/logo.jpg" width="60px" height="60px" alt="">
-            </a>
-            <p class="text-white">&copy; 2021</p>
-        </div>
-
-        <div class="col">
-        </div>
-
-        <div class="col ">
-            <h5>Product</h5>
-            <ul class="nav flex-column ">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Pricing</a></li>
-            </ul>
-        </div>
-        <div class="col">
-            <h5>Resources</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Blog</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">User grades</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Webinars</a></li>
-            </ul>
-        </div>
-
-        <div class="col">
-            <h5>Platform</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Parterners &
-                        Integration</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Become a partner</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-secondary">Developer Api</a></li>
-            </ul>
-        </div>
-    </footer>
-</div>
-
-
-</body>
-
-<l>
+<html>

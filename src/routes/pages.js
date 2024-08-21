@@ -9,6 +9,7 @@ function ensureAuthenticated(req, res, next) {
     res.redirect("/in");
   }
 }
+
 // Basic route for home page
 router.get("/", (req, res) => {
   if (req.session.loggedinUser) {
@@ -23,19 +24,20 @@ router.get("/dashboard", ensureAuthenticated, (req, res) => {
   res.render("dashboard", { message: null });
 });
 
-router.get("/Emteam", ensureAuthenticated, (req, res) => {
+/* router.get("/Emteam", ensureAuthenticated, (req, res) => {
   res.render("Emteam", { message: null });
 });
 
 router.get("/Emdirectory", ensureAuthenticated, (req, res) => {
   res.render("Emdirectory", { message: null });
-});
+}); */
 
-router.get("/Tasktodo", ensureAuthenticated, (req, res) => {
+router.get("/Tasktodo/", ensureAuthenticated, (req, res) => {
+  let message = req.query.message;
   const sql = `SELECT * FROM tasks`;
   db.query(sql, (err, rows) => {
     if (err) throw err;
-    res.render("Tasktodo", { data: rows, message: null });
+    res.render("Tasktodo", { data: rows, message: message || null });
   });
 });
 
@@ -69,7 +71,15 @@ router.get("/in", (req, res) => {
 });
 
 router.get("/up", (req, res) => {
-  res.render("signup", { message: null });
+  const message = req.query.message;
+  if (message) {
+    res.render("signup", {
+      message:
+        "All the fields are required,except language 1,2,3 and Technical/Vocational School details ",
+    });
+  } else {
+    res.render("signup", { message: null });
+  }
 });
 
 router.get("/viewJobs", ensureAuthenticated, (req, res) => {
@@ -90,24 +100,40 @@ router.get("/viewJobs", ensureAuthenticated, (req, res) => {
 router.get("/myaccount", ensureAuthenticated, (req, res) => {
   const userId = req.session.userid;
   const success = req.query.success;
+  const message = req.query.message;
+
   const sql = `SELECT * from applicant_information where id = ${userId}`;
   db.query(sql, (err, rows) => {
     if (err) throw err;
-    res.render("myaccount", { message: null, data: rows, success: success });
+    if (message) {
+      res.render("myaccount", {
+        message: message,
+        data: rows,
+        success: success,
+      });
+    } else {
+      res.render("myaccount", { message: null, data: rows, success: success });
+    }
   });
 });
 
 router.get("/changepwd", ensureAuthenticated, (req, res) => {
   const userId = req.session.userid;
+  const message = req.query.message;
   const sql = `SELECT * from applicant_information where id = ${userId}`;
   db.query(sql, (err, rows) => {
     if (err) throw err;
-    res.render("changepwd", { message: null, success: null });
+    if (message) {
+      res.render("changepwd", { message: message, success: null });
+    } else {
+      res.render("changepwd", { message: null, success: null });
+    }
   });
 });
 
 router.get("/addTask", ensureAuthenticated, (req, res) => {
-  res.render("addTask", { message: null });
+  let message = req.query.message;
+  res.render("addTask", { message: message || null });
 });
 
 router.get("/addJob", ensureAuthenticated, (req, res) => {

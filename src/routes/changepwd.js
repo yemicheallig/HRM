@@ -19,12 +19,15 @@ router.post(
   ],
   (req, res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
-      return res.status(400).render("changepwd", {
-        message: "Invalid input",
-        success: null,
-        errors: errors.array(),
-      });
+      // Format error messages into a string
+      const errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(" and ");
+      // Render signup page with error messages
+      return res.redirect(`/changepwd?message=${errorMessages}`);
     }
 
     const { currentPwd, newPwd } = req.body;
@@ -35,17 +38,13 @@ router.post(
     db.query(sql, [userId], async (error, results) => {
       if (error) {
         console.error("Database error:", error);
-        return res.status(500).render("changepwd", {
-          message: "An error occurred. Please try again.",
-          success: null,
-        });
+        return res
+          .status(500)
+          .redirect("/changepwd?message=An error occurred. Please try again.");
       }
 
       if (results.length === 0) {
-        return res.status(404).render("changepwd", {
-          message: "User not found.",
-          success: null,
-        });
+        return res.status(404).redirect("/changepwd?message=User not found.");
       }
 
       const storedPassword = results[0].password;
@@ -60,28 +59,27 @@ router.post(
           db.query(updateSql, [hashedPassword, userId], (updateErr) => {
             if (updateErr) {
               console.error("Password update error:", updateErr);
-              return res.status(500).render("changepwd", {
-                message: "Error updating password. Please try again.",
-                success: null,
-              });
+              return res
+                .status(500)
+                .redirect(
+                  "/changepwd?message=Error updating password. Please try again."
+                );
             }
-            return res.render("changepwd", {
+            return res.redirect("changepwd", {
               message: null,
               success: true,
             });
           });
         } catch (hashErr) {
           console.error("Hashing error:", hashErr);
-          return res.status(500).render("changepwd", {
-            message: "Error processing password. Please try again.",
-            success: null,
-          });
+          return res
+            .status(500)
+            .redirect(
+              "/changepwd?message=Error processing password. Please try again."
+            );
         }
       } else {
-        return res.render("changepwd", {
-          message: "Current password is incorrect.",
-          success: null,
-        });
+        return res.redirect("changepwd?message=Current password is incorrect.");
       }
     });
   }

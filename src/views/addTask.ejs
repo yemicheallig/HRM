@@ -51,9 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <!--  <li class="nav-item">
                         <a class="nav-link " href="./Emteam">Employee Management</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link active" href="./Tasktodo">Task List</a>
                     </li>
@@ -72,97 +72,105 @@
         <a href="/tasktodo">Back</a>
         <h1 class="text-center">Add Task</h1>
         <div class="container mt-5">
-            <form class="mt-5" action="/AddTask" method="post" enctype="multipart/form-data">
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="taskTitle">1. Task Title:</label>
-                            <input type="text" id="taskTitle" name="task_title" class="form-control" />
-                        </div>
-                    </div>
+            <% if (message && message !=='success' ) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= message %>
                 </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="taskDescription">2. Task Description:</label>
-                            <textarea class="form-control mb-2" id="taskDescription" name="task_description"
-                                rows="3"></textarea>
+                <% } %>
+                    <form class="mt-5" action="/AddTask" method="post" enctype="multipart/form-data">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="taskTitle">1. Task Title:</label>
+                                    <input type="text" id="taskTitle" name="task_title" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="taskDescription">2. Task Description:</label>
+                                    <textarea class="form-control mb-2" id="taskDescription" name="task_description"
+                                        rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="priority">3. Priority:</label>
-                            <select id="priority" name="priority" class="form-control">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
-                            </select>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="priority">3. Priority:</label>
+                                    <select id="priority" name="priority" class="form-control">
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                        <option value="Urgent">Urgent</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="status">4. Status:</label>
-                            <select id="status" name="status" class="form-control">
-                                <option value="NotStarted">Not Started</option>
-                                <option value="InProgress">In Progress</option>
-                                <option value="Completed">Completed</option>
-                                <option value="OnHold">On Hold</option>
-                            </select>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="status">4. Status:</label>
+                                    <select id="status" name="status" class="form-control">
+                                        <option value="NotStarted">Not Started</option>
+                                        <option value="InProgress">In Progress</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="OnHold">On Hold</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="startDate">5. Start Date:</label>
-                            <input type="date" id="startDate" name="start_date" class="form-control" />
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="startDate">5. Start Date:</label>
+                                    <input type="date" id="startDate" name="start_date" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="dueDate">6. Due Date:</label>
-                            <input type="date" id="dueDate" name="due_date" class="form-control" />
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="dueDate">6. Due Date:</label>
+                                    <input type="date" id="dueDate" name="due_date" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="attachments">7. Attachments:</label>
-                            <br>
-                            <span>Any relevant files or documents related to the task.</span>
-                            <input type="file" id="attachments" name="attachments" class="form-control" />
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="attachments">7. Attachments: jpg, jpeg, png,
+                                        gif,
+                                        webp,
+                                        svg+xml, tiff, pdf, doc, docx, ppt, only allowed</label>
+                                    <br>
+                                    <span>Any relevant files or documents related to the task.</span>
+                                    <input type="file" id="attachments" name="attachments" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="department">9. Department:</label>
-                            <input type="text" id="department" name="department" class="form-control" />
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="department">9. Department:</label>
+                                    <input type="text" id="department" name="department" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <label class="form-label" for="progress">10. Progress (%):</label>
-                            <input type="number" id="progress" name="progress" class="form-control" />
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-label" for="progress">10. Progress (%):</label>
+                                    <input type="number" id="progress" name="progress" class="form-control" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <button type="submit" class="btn btn-primary">Add Task</button>
-                </div>
-            </form>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary">Add Task</button>
+                        </div>
+                    </form>
 
         </div>
 

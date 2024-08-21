@@ -5,12 +5,11 @@ const router = express.Router();
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, check } = require("express-validator");
 const mime = require("mime-types");
 
 const uploadsPath = path.join(__dirname, "../../public/taskFile");
 var unique;
-
 // Ensure the upload directory exists
 if (!fs.existsSync(uploadsPath)) {
   fs.mkdirSync(uploadsPath, { recursive: true });
@@ -55,44 +54,60 @@ const upload = multer({
   fileFilter: fileFilterConfig,
 });
 
+const filetypes = [
+  "jpg",
+  "jpeg",
+  "png",
+  "gif",
+  "webp",
+  "svg+xml",
+  "tiff",
+  "pdf",
+  "doc",
+  "docx",
+  "ppt",
+];
+
 // Validation middleware for task data with stricter validation rules
 const validateTaskData = [
-  body("task_title").trim().isLength({ min: 1, max: 255 }).escape(),
-  body("task_description").trim().optional({ nullable: true }).escape(),
-  body("priority").trim().optional({ nullable: true }).escape(),
-  body("status").trim().optional({ nullable: true }).escape(),
-  body("start_date").isISO8601().toDate().withMessage("Invalid start date"),
-  body("due_date").isISO8601().toDate().withMessage("Invalid due date"),
-  body("department").trim().isLength({ max: 100 }).escape(),
   body("progress")
     .isFloat({ min: 0, max: 100 })
     .withMessage("Progress must be between 0 and 100"),
+  check("attachments")
+    .custom((value, { req }) => {
+      const fileExtension = path
+        .extname(req.file.originalname)
+        .toLowerCase()
+        .slice(1);
+      if (!filetypes.includes(fileExtension)) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage(
+      "jpg, jpeg, png, gif, webp, svg+xml, tiff, pdf, doc, docx, ppt, only allowed"
+    ),
 ];
+
+var errorMessages;
 
 router.post(
   "/AddTask",
   upload.single("attachments"),
   validateTaskData,
   (req, res) => {
-    /* const errors = validationResult(req);
-
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).render("addTask", { errors: errors.array() });
-    } */
+      errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(",");
+      return res.status(400).redirect(`/addTask?message=${errorMessages}`);
+    }
 
     // Handle file validation after multer processes it
     const fileName = req.file && `${unique}${req.file.originalname}`;
     const attachments = req.file ? fileName : null;
-
-    // Validate the file extension as an extra layer of security
-    if (fileName) {
-      const ext = mime.extension(req.file.mimetype);
-      if (!["pdf", "doc", "docx", "jpeg", "jpg", "png"].includes(ext)) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: "Invalid file extension" }] });
-      }
-    }
 
     const {
       task_title,
@@ -112,6 +127,26 @@ router.post(
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
+    const required = [
+      task_title,
+      task_description,
+      priority,
+      status,
+      start_date,
+      due_date,
+      department,
+      Number(progress),
+    ];
+
+    required.every((field) => {
+      if (field == "") {
+        res
+          .status(400)
+          .redirect("/addtask?message=Please Fill In All of the field");
+        return false;
+      }
+    });
+
     const values = [
       task_title,
       task_description,
@@ -130,27 +165,26 @@ router.post(
         return res.status(500).json({ error: "Transaction initiation failed" });
       }
 
-      db.query(query, values, (err, results) => {
+      /*  db.query(query, values, (err, results) => {
         if (err) {
           db.rollback(() => {
             console.error("Database error:", err);
-            res.status(500).send("Error saving task.");
+            return res.status(500).send("Error saving task.");
           });
         } else {
           db.commit((commitErr) => {
             if (commitErr) {
               db.rollback(() => {
                 console.error("Commit error:", commitErr);
-                res.status(500).send("Error committing task data.");
+                return res.status(500).send("Error committing task data.");
               });
             } else {
-              res.status(201).json({ message: "Task added successfully!" });
+              return res.status(201).redirect("/tasktodo?message=success");
             }
           });
         }
-      });
+      }); */
     });
-    res.send(values);
   }
 );
 

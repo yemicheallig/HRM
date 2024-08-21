@@ -51,9 +51,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./dashboard">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link " href="./Emteam">Employee Management</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="./Tasktodo">Task List</a>
                     </li>
@@ -68,278 +68,316 @@
         </div>
     </nav>
 
+
+
     <div class="container mt-5 mb-2 py-3" style="max-width: 900px;">
         <a href="/RJobs">Back</a>
         <h1 class="text-center">Edit Job</h1>
         <div class="container mt-5">
-            <% if(data) { %>
-                <% data.forEach(element=> { %>
+            <% if (message && message !=='success' ) {%>
+                <div class="alert alert-danger" role="alert">
+                    <%= message %>
+                </div>
+                <% } else if (message=='success' ) { %>
+                    <script>
+                        alert('Job Edited Sucessfully')
+                    </script>
+                    <% } %>
+                        <% if(data) { %>
+                            <% data.forEach(element=> { %>
+                                <form class="mt-5" action="/EditJob" method="post" enctype="multipart/form-data">
+                                    <form class="mt-5" action="/EditJob" method="post" enctype="multipart/form-data">
+                                        <input type="text" style="display: none;" name="id" value="<%= element.id %>">
 
-                    <form class="mt-5" action="/EditJob" method="post" enctype="multipart/form-data">
-                        <form class="mt-5" action="/EditJob" method="post" enctype="multipart/form-data">
-                            <input type="text" style="display: none;" name="id" value="<%= element.id %>">
+                                        <!-- Job Title -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="jobTitle">Job Title:</label>
+                                                    <input type="text" id="jobTitle" name="job_title"
+                                                        class="form-control" value="<%= element.job_title %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Job Title -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="jobTitle">Job Title:</label>
-                                        <input type="text" id="jobTitle" name="job_title" class="form-control"
-                                            value="<%= element.job_title %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Total Candidates -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="totalCandidates">Total
+                                                        Candidates:</label>
+                                                    <input type="number" id="totalCandidates" name="total_candidates"
+                                                        class="form-control" value="<%= element.total_candidates %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Total Candidates -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="totalCandidates">Total Candidates:</label>
-                                        <input type="number" id="totalCandidates" name="total_candidates"
-                                            class="form-control" value="<%= element.total_candidates %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Vacancies -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="vacancies">Vacancies:</label>
+                                                    <input type="number" id="vacancies" name="vacancies"
+                                                        class="form-control" value="<%= element.vacancies %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Vacancies -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="vacancies">Vacancies:</label>
-                                        <input type="number" id="vacancies" name="vacancies" class="form-control"
-                                            value="<%= element.vacancies %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Department -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="department">Department:</label>
+                                                    <input type="text" id="department" name="department"
+                                                        class="form-control" value="<%= element.department %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Department -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="department">Department:</label>
-                                        <input type="text" id="department" name="department" class="form-control"
-                                            value="<%= element.department %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Job Description -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="jobDescription">Job
+                                                        Description:</label>
+                                                    <textarea id="jobDescription" name="job_description"
+                                                        class="form-control"
+                                                        rows="4"><%= element.job_description %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Job Description -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="jobDescription">Job Description:</label>
-                                        <textarea id="jobDescription" name="job_description" class="form-control"
-                                            rows="4"><%= element.job_description %></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Job Requirements -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="jobRequirements">Job
+                                                        Requirements:</label>
+                                                    <textarea id="jobRequirements" name="job_requirements"
+                                                        class="form-control"
+                                                        rows="4"><%= element.job_requirements %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Job Requirements -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="jobRequirements">Job Requirements:</label>
-                                        <textarea id="jobRequirements" name="job_requirements" class="form-control"
-                                            rows="4"><%= element.job_requirements %></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Employment Type -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="employmentType">Employment
+                                                        Type:</label>
+                                                    <select id="employmentType" name="employment_type"
+                                                        class="form-control">
+                                                        <option value="Full-Time" <% if
+                                                            (element.employment_type==='Full-Time' ) { %>selected<% } %>
+                                                                >Full-Time</option>
+                                                        <option value="Part-Time" <% if
+                                                            (element.employment_type==='Part-Time' ) { %>selected<% } %>
+                                                                >Part-Time</option>
+                                                        <option value="Contract" <% if
+                                                            (element.employment_type==='Contract' ) { %>
+                                                            selected
+                                                            <% } %>>Contract
+                                                        </option>
+                                                        <option value="Temporary" <% if
+                                                            (element.employment_type==='Temporary' ) { %>selected<% } %>
+                                                                >Temporary</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Employment Type -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="employmentType">Employment Type:</label>
-                                        <select id="employmentType" name="employment_type" class="form-control">
-                                            <option value="Full-Time" <% if (element.employment_type==='Full-Time' ) {
-                                                %>selected<% } %>>Full-Time</option>
-                                            <option value="Part-Time" <% if (element.employment_type==='Part-Time' ) {
-                                                %>selected<% } %>>Part-Time</option>
-                                            <option value="Contract" <% if (element.employment_type==='Contract' ) { %>
-                                                selected
-                                                <% } %>>Contract
-                                            </option>
-                                            <option value="Temporary" <% if (element.employment_type==='Temporary' ) {
-                                                %>selected<% } %>>Temporary</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Location -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="location">Location:</label>
+                                                    <input type="text" id="location" name="location"
+                                                        class="form-control" value="<%= element.location %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Location -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="location">Location:</label>
-                                        <input type="text" id="location" name="location" class="form-control"
-                                            value="<%= element.location %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Salary Range -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="salaryRange">Salary Range:</label>
+                                                    <input type="text" id="salaryRange" name="salary_range"
+                                                        class="form-control" value="<%= element.salary_range %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Salary Range -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="salaryRange">Salary Range:</label>
-                                        <input type="text" id="salaryRange" name="salary_range" class="form-control"
-                                            value="<%= element.salary_range %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Application Deadline -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="applicationDeadline">Application
+                                                        Deadline:</label>
+                                                    <input type="date" id="applicationDeadline"
+                                                        name="application_deadline" class="form-control"
+                                                        value="<%= element.application_deadline %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Application Deadline -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="applicationDeadline">Application
-                                            Deadline:</label>
-                                        <input type="date" id="applicationDeadline" name="application_deadline"
-                                            class="form-control" value="<%= element.application_deadline %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="experienceLevel">Experience
+                                                        Level:</label>
+                                                    <select id="experienceLevel" name="experience_level"
+                                                        class="form-control">
+                                                        <option value="Entry-Level" <% if
+                                                            (element.experience_level==='Entry-Level' ) { %>selected<% }
+                                                                %>Entry-Level</option>
+                                                        <option value="Mid-Level" <% if
+                                                            (element.experience_level==='Mid-Level' ) { %>selected<% }
+                                                                %>>Mid-Level</option>
+                                                        <option value="Senior-Level" <% if
+                                                            (element.experience_level==='Senior-Level' ) { %>selected<%
+                                                                } %>
+                                                                >Senior-Level</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="experienceLevel">Experience Level:</label>
-                                        <select id="experienceLevel" name="experience_level" class="form-control">
-                                            <option value="Entry-Level" <% if (element.experience_level==='Entry-Level'
-                                                ) { %>selected<% } %>Entry-Level</option>
-                                            <option value="Mid-Level" <% if (element.experience_level==='Mid-Level' ) {
-                                                %>selected<% } %>>Mid-Level</option>
-                                            <option value="Senior-Level" <% if
-                                                (element.experience_level==='Senior-Level' ) { %>selected<% } %>
-                                                    >Senior-Level</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Education Requirements -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="educationRequirements">Education
+                                                        Requirements:</label>
+                                                    <input type="text" id="educationRequirements"
+                                                        name="education_requirements" class="form-control"
+                                                        value="<%= element.education_requirements %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Education Requirements -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="educationRequirements">Education
-                                            Requirements:</label>
-                                        <input type="text" id="educationRequirements" name="education_requirements"
-                                            class="form-control" value="<%= element.education_requirements %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Skills  -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="skillsRequired">Skills
+                                                        Required:</label>
+                                                    <textarea id="skillsRequired" name="skills_required"
+                                                        class="form-control"
+                                                        rows="4"><%= element.skills_required %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Skills  -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="skillsRequired">Skills Required:</label>
-                                        <textarea id="skillsRequired" name="skills_required" class="form-control"
-                                            rows="4"><%= element.skills_required %></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Job Benefits -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="jobBenefits">Job Benefits:</label>
+                                                    <textarea id="jobBenefits" name="job_benefits" class="form-control"
+                                                        rows="4"><%= element.job_benefits %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Job Benefits -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="jobBenefits">Job Benefits:</label>
-                                        <textarea id="jobBenefits" name="job_benefits" class="form-control"
-                                            rows="4"><%= element.job_benefits %></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Contact Information -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="contactInformation">Contact
+                                                        Information:</label>
+                                                    <input type="text" id="contactInformation"
+                                                        name="contact_information" class="form-control"
+                                                        value="<%= element.contact_information %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Contact Information -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="contactInformation">Contact Information:</label>
-                                        <input type="text" id="contactInformation" name="contact_information"
-                                            class="form-control" value="<%= element.contact_information %>" />
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Posting Date -->
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="postingDate">Posting Date:</label>
+                                                    <input type="date" id="postingDate" name="posting_date"
+                                                        class="form-control" value="<%= element.posting_date %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <!-- Posting Date -->
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="postingDate">Posting Date:</label>
-                                        <input type="date" id="postingDate" name="posting_date" class="form-control"
-                                            value="<%= element.posting_date %>" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="jobCategory">Job Category:</label>
-                                        <input type="text" id="jobCategory" name="job_category" class="form-control"
-                                            value="<%= element.job_category %>" />
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="responsibilities">Responsibilities:</label>
-                                        <textarea id="responsibilities" name="responsibilities" class="form-control"
-                                            rows="4"><%= element.responsibilities %></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="jobCategory">Job Category:</label>
+                                                    <input type="text" id="jobCategory" name="job_category"
+                                                        class="form-control" value="<%= element.job_category %>" />
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="applicationMethod">Application Method:</label>
-                                        <input type="text" id="applicationMethod" name="application_method"
-                                            class="form-control" value="<%= element.application_method %>" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="additionalNotes">Additional Notes or
-                                            Comments:</label>
-                                        <textarea id="additionalNotes" name="additional_notes" class="form-control"
-                                            rows="4"><%= element.additional_notes %></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label"
+                                                        for="responsibilities">Responsibilities:</label>
+                                                    <textarea id="responsibilities" name="responsibilities"
+                                                        class="form-control"
+                                                        rows="4"><%= element.responsibilities %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="rimage">Related Image:</label>
-                                        <input type="file" id="rimage" name="relatedImage" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-4 d-none">
-                                <div class="col">
-                                    <div class="form-outline mb-4">
-                                        <label class="form-label" for="filepath">File Path:</label>
-                                        <input type="text" id="filepath" name="filepath" class="form-control"
-                                            value="<%= element.relatedImage %>" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary">Commit Changes</button>
-                            </div>
-                        </form>
 
-                        <% }); %>
-                            <% } %>
+
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="applicationMethod">Application
+                                                        Method:</label>
+                                                    <input type="text" id="applicationMethod" name="application_method"
+                                                        class="form-control"
+                                                        value="<%= element.application_method %>" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="additionalNotes">Additional Notes or
+                                                        Comments:</label>
+                                                    <textarea id="additionalNotes" name="additional_notes"
+                                                        class="form-control"
+                                                        rows="4"><%= element.additional_notes %></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="rimage">Related Image:</label>
+                                                    <input type="file" id="rimage" name="relatedImage"
+                                                        class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4 d-none">
+                                            <div class="col">
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="filepath">File Path:</label>
+                                                    <input type="text" id="filepath" name="filepath"
+                                                        class="form-control" value="<%= element.relatedImage %>" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" class="btn btn-primary">Commit Changes</button>
+                                        </div>
+                                    </form>
+
+                                    <% }); %>
+                                        <% } %>
         </div>
 </body>
 
