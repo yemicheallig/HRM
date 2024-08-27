@@ -103,6 +103,7 @@
                         <th scope="col">Employee Type</th>
                         <th scope="col">View More</th>
                         <th scope="col">Delete</th>
+                        <th scope="col">Action</th>
                     </thead>
                 </tr>
                 <% if(data.length> 0){ %>
@@ -134,6 +135,10 @@
                                         class="text-danger">
                                         Delete
                                     </a>
+                                </td>
+                                <td>
+                                    <a href="mailAppl?email=<%= element.email %>&&user=<%= element.id %>&&job=<%= element.jobid %>"
+                                        class="btn btn-success">Accept</a>
                                 </td>
                             </tbody>
                         </tr>

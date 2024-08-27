@@ -13,6 +13,7 @@ const editJob = require("./src/routes/editJob");
 const myaccount = require("./src/routes/myaccount");
 const changepwd = require("./src/routes/changepwd");
 const deleteFunction = require("./src/routes/delete");
+const mailAppl = require("./src/routes/mailAppl");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -39,6 +40,8 @@ app.use("/", editJob);
 app.use("/", myaccount);
 app.use("/", changepwd);
 app.use("/", deleteFunction);
+app.use("/", mailAppl);
+
 app.get("*", (req, res) => {
   res.send(
     `<div style='height:100vh;width:100%;display:flex;flex-direction:column;justify-content:center'><h1 style='text-align:center;margin-bottom:30px'>404 Page Not Found</h1><a href='/' style='text-align:center'>Home</a></div>`

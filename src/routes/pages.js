@@ -10,6 +10,9 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
+router.get("/head", (req, res) => {
+  res.render("header");
+});
 // Basic route for home page
 router.get("/", (req, res) => {
   if (req.session.loggedinUser) {
@@ -68,6 +71,10 @@ router.get("/RJobs", ensureAuthenticated, (req, res) => {
 // Public routes
 router.get("/in", (req, res) => {
   res.render("signin", { message: null });
+});
+
+router.get("/adminLogin", (req, res) => {
+  res.render("adminLogin", { message: null });
 });
 
 router.get("/up", (req, res) => {

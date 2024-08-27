@@ -41,7 +41,7 @@ router.post(
           req.session.loggedinUser = true;
           req.session.email = email;
           req.session.userid = user.id;
-          res.status(200).redirect("/myaccount");
+          res.status(200).redirect("/viewJobs");
         } else {
           res.status(401).render("signin", { message: "password don't match" });
         }
