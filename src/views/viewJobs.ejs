@@ -73,7 +73,6 @@
         </div>
     </nav>
 
-
     <div class="container-fluid container-md  align-items-center my-5">
         <center class="row">
             <% if(data){ %>
@@ -96,7 +95,7 @@
                                 </p>
                                 <p>Contact Info: <%= element.contact_information %>
                                 </p>
-                                <p><a href="/detailsJob/<%= element.id %>">View Details</a></p>
+                                <p><a href="/detailsJob?id=<%= element.id %>">View Details</a></p>
                                 <p><a href="apply?user=<%= user %>&&job=<%= element.id %>" class="btn btn-primary">Apply
                                         Now</a></p>
                             </div>
@@ -113,6 +112,14 @@
         </center>
     </div>
 
+    <center id="loading">Loading...</center>
+    <script>
+        let loading = document.getElementById('loading')
+        loading.style.display = 'block'
+        document.addEventListener('DOMContentLoaded', () => {
+            loading.style.display = 'none'
+        })
+    </script>
 
     <div class="container-fluid bg-dark" style="margin-top: 100vh;">
         <footer class="row row-cols-5 py-5 mt-5 mx-md-5 border-top text-white">

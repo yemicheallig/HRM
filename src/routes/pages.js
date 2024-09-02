@@ -10,6 +10,17 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
+function queryAsync(sql, params) {
+  return new Promise((resolve, reject) => {
+    db.query(sql, params, (err, results) => {
+      if (err) {
+        return reject(err); // Reject the promise with the error
+      }
+      resolve(results); // Resolve the promise with the results
+    });
+  });
+}
+
 router.get("/head", (req, res) => {
   res.render("header");
 });
@@ -89,18 +100,20 @@ router.get("/up", (req, res) => {
   }
 });
 
-router.get("/viewJobs", ensureAuthenticated, (req, res) => {
+router.get("/viewJobs", ensureAuthenticated, async (req, res) => {
   const { applied } = req.query;
-  const sql = `SELECT * FROM job_postings`;
-  db.query(sql, (error, row) => {
-    if (error) throw error;
+  try {
+    const sql = `SELECT * FROM job_postings`;
+    const row = await queryAsync(sql);
     res.render("viewJobs", {
       message: null,
       data: row,
       user: req.session.userid,
       applied: applied,
     });
-  });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Protected account-related routes
@@ -167,13 +180,16 @@ router.get("/detailsTask/:id", (req, res) => {
   });
 });
 
-router.get("/detailsJob/:id", (req, res) => {
-  const jobId = req.params.id;
+router.get("/detailsJob", (req, res) => {
+  const jobId = req.query.id;
   const sql = `SELECT * FROM job_postings where id = ?`;
-
   db.query(sql, [jobId], (error, row) => {
     if (error) throw error;
-    res.render("detailsJob", { message: null, data: row });
+    res.render("detailsJob", {
+      message: null,
+      data: row,
+      user: req.session.userid,
+    });
   });
 });
 

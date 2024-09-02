@@ -30,30 +30,45 @@ const upload = multer({
 
 var filetypes;
 filetypes = ["pdf", "doc", "jpg", "png", "jpeg", "docx"]; // Accept only specific file types
+
+const validateUserData = [
+  body("email").isEmail().withMessage("Invalid email address"),
+  body("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+  body("phone_no").isMobilePhone().withMessage("Invalid phone number."),
+  check("resume")
+    .custom((value, { req }) => {
+      const fileExtension = path
+        .extname(req.file.originalname)
+        .toLowerCase()
+        .slice(1);
+      if (!filetypes.includes(fileExtension)) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage("pdf, doc, jpg, png, jpeg, docx only allowed"),
+
+  // Add more validation rules as needed
+];
+
 router.post(
   "/RegisterApplicant",
+  validateUserData,
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorMessages = errors
+        .array()
+        .map((err) => err.msg)
+        .join(" and ");
+      // Render signup page with error messages
+      return res.render("signup", { message: errorMessages });
+    }
+    next();
+  },
   upload.single("resume"),
-  [
-    body("email").isEmail().withMessage("Invalid email address"),
-    body("password")
-      .isLength({ min: 8 })
-      .withMessage("Password must be at least 8 characters long"),
-    body("phone_no").isMobilePhone().withMessage("Invalid phone number."),
-    check("resume")
-      .custom((value, { req }) => {
-        const fileExtension = path
-          .extname(req.file.originalname)
-          .toLowerCase()
-          .slice(1);
-        if (!filetypes.includes(fileExtension)) {
-          return false;
-        }
-        return true;
-      })
-      .withMessage("pdf, doc, jpg, png, jpeg, docx only allowed"),
-
-    // Add more validation rules as needed
-  ],
   async (req, res) => {
     try {
       const {
@@ -90,16 +105,6 @@ router.post(
         leaving_reason,
       } = req.body;
 
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        // Format error messages into a string
-        const errorMessages = errors
-          .array()
-          .map((err) => err.msg)
-          .join(" and ");
-        // Render signup page with error messages
-        return res.render("signup", { message: errorMessages });
-      }
       // Hash password before storing it
       const hashedPassword = await bcrypt.hash(password, 10);
       const fileName = req.file && `${unique}${req.file.originalname}`;

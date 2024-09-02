@@ -165,7 +165,7 @@ router.post(
         return res.status(500).json({ error: "Transaction initiation failed" });
       }
 
-      /*  db.query(query, values, (err, results) => {
+      db.query(query, values, (err, results) => {
         if (err) {
           db.rollback(() => {
             console.error("Database error:", err);
@@ -183,7 +183,7 @@ router.post(
             }
           });
         }
-      }); */
+      });
     });
   }
 );

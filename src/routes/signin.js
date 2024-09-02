@@ -4,13 +4,24 @@ const db = require("../models/db");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
+function queryAsync(sql, params) {
+  return new Promise((resolve, reject) => {
+    db.query(sql, params, (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(results);
+    });
+  });
+}
+
 router.post(
   "/LoginApplicant",
   [
     body("email").isEmail().withMessage("Invalid email address"),
     body("password").notEmpty().withMessage("Password is required"),
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const errorMessages = errors
@@ -23,14 +34,10 @@ router.post(
 
     const email = req.body.email;
     const password = req.body.password;
-
-    const sql =
-      "SELECT id,email, password FROM applicant_information WHERE email = ?";
-    db.query(sql, [email], async function (err, data) {
-      if (err) {
-        console.error(err);
-        return res.status(500).send("Internal server error");
-      }
+    try {
+      const sql =
+        "SELECT id,email, password FROM applicant_information WHERE email = ?";
+      const data = await queryAsync(sql, [email]);
 
       if (data.length > 0) {
         const user = data[0];
@@ -50,7 +57,10 @@ router.post(
           .status(401)
           .render("signin", { message: "Invalid email or password" });
       }
-    });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send("Internal server error");
+    }
   }
 );
 

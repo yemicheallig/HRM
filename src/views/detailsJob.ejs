@@ -137,10 +137,10 @@
                             <%= element.additional_notes %>
                         </p>
                         <% } %>
-                            <p><a href="/apply/<%= element.id %>" class="btn btn-primary">Apply Now</a></p>
+                            <p><a href="apply?user=<%= user %>&&job=<%= element.id %>" class="btn btn-primary">Apply
+                                    Now</a></p>
                             <% }); %>
                                 <% } %>
-
                 </div>
     </div>
 

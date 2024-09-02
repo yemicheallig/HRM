@@ -12,6 +12,9 @@ router.get("/mailAppl", (req, res) => {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_PASS,
     },
+
+    connectionTimeout: 60000, // 60 seconds
+    socketTimeout: 60000,
   });
 
   var mailOptions = {

@@ -66,8 +66,6 @@ const validateJobData = [
     .withMessage("jpg, jpeg, png, gif, webp, svg+xml, tiff only allowed"),
 ];
 
-
-
 router.post(
   "/AddJob",
   upload.single("relatedImage"),
